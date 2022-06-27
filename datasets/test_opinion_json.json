@@ -1,0 +1,55 @@
+[
+{
+    "count": 6171613,
+    "next": "https://www.courtlistener.com/api/rest/v3/opinions/?page=2",
+    "previous": null,
+    "results": [
+        {
+            "resource_uri": "https://www.courtlistener.com/api/rest/v3/opinions/6349839/",
+            "id": 6349839,
+            "absolute_url": "/opinion/6477728/state-v-raquino/",
+            "cluster": "https://www.courtlistener.com/api/rest/v3/clusters/6477728/",
+            "author": "Testing Author Entry 1",
+            "joined_by": [],
+            "date_created": "2022-06-14T18:02:12.702315-07:00",
+            "date_modified": "2022-06-14T18:02:19.604079-07:00",
+            "author_str": "",
+            "per_curiam": false,
+            "joined_by_str": "",
+            "type": "010combined",
+            "sha1": "e087cf66b049453a4cdf767969fe9f211204ef9a",
+            "page_count": 2,
+            "download_url": "https://www.courts.state.hi.us/wp-content/uploads/2022/06/CAAP-21-0000686dsm.pdf",
+            "local_path": "pdf/2022/06/14/state_v._raquino.pdf",
+            "plain_text": "Here is the plain text from the first entry ...",
+            "html": "",
+            "html_lawbox": "",
+            "html_columbia": "",
+            "html_anon_2020": "",
+            "xml_harvard": "",
+            "html_with_citations": "",
+            "extracted_by_ocr": false,
+            "opinions_cited": []
+        },
+        {
+            "resource_uri": "https://www.courtlistener.com/api/rest/v3/opinions/6349838/",
+            "id": 6349838,
+            "absolute_url": "/opinion/6477727/bastani-v-american-federation-of-government-employees-afl-cio/",
+            "cluster": "https://www.courtlistener.com/api/rest/v3/clusters/6477727/",
+            "author": "Testing Author Entry 2",
+            "joined_by": [],
+            "date_created": "2022-06-14T18:00:49.131599-07:00",
+            "date_modified": "2022-06-14T18:19:41.337358-07:00",
+            "author_str": "",
+            "per_curiam": false,
+            "joined_by_str": "",
+            "type": "010combined",
+            "sha1": "298fb6e1e78f1b1f85d0c8323462deeb74a06802",
+            "page_count": 7,
+            "download_url": "https://ecf.dcd.uscourts.gov/cgi-bin/show_public_doc?2020cv3061-18",
+            "local_path": "pdf/2022/06/14/bastani_v._american_federation_of_government_employees_afl-cio.pdf",
+            "plain_text": "Hello, here is some more plain text information!"
+        }
+    ]
+}
+]
