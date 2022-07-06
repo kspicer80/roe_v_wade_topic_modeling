@@ -1,2 +1,4 @@
 
 datasets/supreme-court-opinions-by-author.jsonl
+datasets/scdb_2021_case_based.csv
+datasets/supreme-court-opinions-by-author.jsonl.gz
