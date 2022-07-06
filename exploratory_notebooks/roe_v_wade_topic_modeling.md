@@ -417,47 +417,53 @@ df_plot = df_plot.rename(
 import matplotlib.pyplot as plt
 import numpy as np
 fig, ax = plt.subplots()
-im = ax.imshow(np.flipud(df_plot.values), cmap='Greys')
+im = ax.imshow(np.flipud(df_plot.values), cmap='Paired')
 ax.set_xticks(np.arange(len(df_plot.columns)))
 ax.set_yticks(np.arange(len(df_plot.index)))
 ax.set_xticklabels(df_plot.columns)
 ax.set_yticklabels(reversed(df_plot.index))
 plt.setp(
     ax.get_xticklabels(), rotation=45, ha='right', rotation_mode='anchor')
-ax.set_title('Topic model and expert label alignment')
-fig.tight_layout()
+ax.set_title('Topic Model and Expert Label Alignment')
 ```
+
+
+
+
+    Text(0.5, 1.0, 'Topic Model and Expert Label Alignment')
+
+
 
 
     
-![png](roe_v_wade_topic_modeling_files/roe_v_wade_topic_modeling_23_0.png)
+![png](roe_v_wade_topic_modeling_files/roe_v_wade_topic_modeling_23_1.png)
     
 
 
 
 ```python
-viability_top_topics = topic_word_distributions['viability'].sort_values(ascending=False).head(5)
+viable_top_topics = topic_word_distributions['viable'].sort_values(ascending=False).head(5)
 ```
 
 
 ```python
-viability_top_topics_top_words = topic_word_distributions.loc[viability_top_topics.index].apply(lambda row: ', '.join(row.sort_values(ascending=False).head().index), axis=1)
+viable_top_topics_top_words = topic_word_distributions.loc[viability_top_topics.index].apply(lambda row: ', '.join(row.sort_values(ascending=False).head().index), axis=1)
 ```
 
 
 ```python
-viability_top_topics_top_words.name = 'topic_top_words'
+viable_top_topics_top_words.name = 'topic_top_words'
 #viability_top_topics.to_frame().join(viability_top_topics_top_words)
 ```
 
 
 ```python
-opinion_of_interest = ('314 US 441', 'jackson_r')
-document_topic_distributions.loc[opinion_of_interest, viability_top_topics.index]
+opinion_of_interest = ('492 US 490', 'rehnquist')
+document_topic_distributions.loc[opinion_of_interest, viable_top_topics.index]
 ```
 
-    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\2919112382.py:2: PerformanceWarning: indexing past lexsort depth may impact performance.
-      document_topic_distributions.loc[opinion_of_interest, viability_top_topics.index]
+    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\488929059.py:2: PerformanceWarning: indexing past lexsort depth may impact performance.
+      document_topic_distributions.loc[opinion_of_interest, viable_top_topics.index]
     
 
 
@@ -483,10 +489,10 @@ document_topic_distributions.loc[opinion_of_interest, viability_top_topics.index
       <th></th>
       <th></th>
       <th>Topic 14</th>
+      <th>Topic 95</th>
+      <th>Topic 44</th>
       <th>Topic 63</th>
-      <th>Topic 81</th>
-      <th>Topic 1</th>
-      <th>Topic 37</th>
+      <th>Topic 6</th>
     </tr>
     <tr>
       <th>us_reports_citation</th>
@@ -500,13 +506,13 @@ document_topic_distributions.loc[opinion_of_interest, viability_top_topics.index
   </thead>
   <tbody>
     <tr>
-      <th>314 US 441</th>
-      <th>jackson_r</th>
-      <td>0.010768</td>
-      <td>0.009794</td>
-      <td>0.000006</td>
-      <td>0.007029</td>
-      <td>0.000006</td>
+      <th>492 US 490</th>
+      <th>rehnquist</th>
+      <td>0.295593</td>
+      <td>0.018732</td>
+      <td>0.030273</td>
+      <td>0.201863</td>
+      <td>0.031692</td>
     </tr>
   </tbody>
 </table>
@@ -519,7 +525,7 @@ document_topic_distributions.loc[opinion_of_interest, viability_top_topics.index
 print(df.loc[opinion_of_interest, 'text'].values[0][1000:2000])
 ```
 
-    Connecticut, in 1905, and  when five years old moved with his parents to Los Angeles, California, where he resided until 1926, when he removed to Berkeley, California.  His parents live in California.  In 1929 he completed his studies at Brown University and immediately thereafter accepted employment in a trust company in Detroit, Michigan, of which one of his former professors at Brown was vice president.  While in Detroit, respondent lived first in a rooming house and later in an apartment. He owns no property there.  In the District of Columbia he lives in an apartment, which he has furnished himself. His present employment pays him $ 6,500 a year, while that which he left in Detroit paid but $ 6,000.  He testified before the Board of Tax Appeals that he does not think he would improve his condition by returning to Detroit, but that "It is the place to which I will return if I ever become disemployed by the Government, which I hope will not happen . . ." Although he has no present c
+    eamble, contains "findings" by the state legislature that "he life of each human being begins at conception," and that "unborn children have protectable interests in life, health, and well-being." Mo. Rev. Stat. §§ 1.205.1(1), (2) (1986). The Act further requires that all Missouri laws be interpreted to provide unborn children with the same rights enjoyed by other persons, subject to the Federal Constitution and this Court's precedents. § 1.205.2. Among its other provisions, the Act requires that, prior to performing an abortion on any woman whom a physician has reason to believe is 20 or more weeks pregnant, the physician ascertain whether the fetus is viable by performing "such medical examinations and tests as are necessary to make a finding of the gestational age, weight, and lung maturity of the unborn child." § 188.029. The Act also prohibits the use of public employees and facilities to perform or assist abortions not necessary to save the mother's life, and it prohibits the use
     
 
     C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\2838681114.py:1: PerformanceWarning: indexing past lexsort depth may impact performance.
@@ -528,27 +534,35 @@ print(df.loc[opinion_of_interest, 'text'].values[0][1000:2000])
 
 
 ```python
-opinion_of_interest = ('529 US 362', "o'connor")
+opinion_of_interest = ('530 US 914', "breyer")
+print(df.loc[opinion_of_interest, 'text'].values[0][0:1000])
 print(
-    f'"viability" count in 529 US 362:',
-    sum('minor' in word.lower()
+    f'"viable count in 530 US 914:',
+    sum('viable' in word.lower()
        for word in df.loc[opinion_of_interest, 'text'].values[0].split()))
 ```
 
-    "viability" count in 529 US 362: 0
+    
+    OPINION BY: BREYER
+    OPINION
+    JUSTICE BREYER delivered the opinion of the Court.
+    We again consider the right to an abortion. We understand the controversial nature of the problem. Millions of Americans believe that life begins at conception and consequently that an abortion is akin to causing the death of an innocent child; they recoil at the thought of a law that would permit it. Other millions fear that a law that forbids abortion would condemn many American women to lives that lack dignity, depriving them of equal liberty and leading those with least resources to undergo illegal abortions with the attendant risks of death and suffering. Taking account of these virtually irreconcilable points of view, aware that constitutional law must govern a society whose different members sincerely hold directly opposing views, and considering the matter in light of the Constitution's guarantees of fundamental individual liberty, this Court, in the course of a generation, has determined and then re
+    "viable count in 530 US 914: 3
     
 
-    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\782744828.py:5: PerformanceWarning: indexing past lexsort depth may impact performance.
+    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\196871453.py:2: PerformanceWarning: indexing past lexsort depth may impact performance.
+      print(df.loc[opinion_of_interest, 'text'].values[0][0:1000])
+    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\196871453.py:6: PerformanceWarning: indexing past lexsort depth may impact performance.
       for word in df.loc[opinion_of_interest, 'text'].values[0].split()))
     
 
 
 ```python
-document_topic_distributions.loc[opinion_of_interest, viability_top_topics.index.tolist() + ['Topic 63']]
+document_topic_distributions.loc[opinion_of_interest, viable_top_topics.index.tolist() + ['Topic 63']]
 ```
 
-    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\4079511877.py:1: PerformanceWarning: indexing past lexsort depth may impact performance.
-      document_topic_distributions.loc[opinion_of_interest, viability_top_topics.index.tolist() + ['Topic 63']]
+    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\374773060.py:1: PerformanceWarning: indexing past lexsort depth may impact performance.
+      document_topic_distributions.loc[opinion_of_interest, viable_top_topics.index.tolist() + ['Topic 63']]
     
 
 
@@ -574,10 +588,10 @@ document_topic_distributions.loc[opinion_of_interest, viability_top_topics.index
       <th></th>
       <th></th>
       <th>Topic 14</th>
+      <th>Topic 95</th>
+      <th>Topic 44</th>
       <th>Topic 63</th>
-      <th>Topic 81</th>
-      <th>Topic 1</th>
-      <th>Topic 37</th>
+      <th>Topic 6</th>
       <th>Topic 63</th>
     </tr>
     <tr>
@@ -593,14 +607,14 @@ document_topic_distributions.loc[opinion_of_interest, viability_top_topics.index
   </thead>
   <tbody>
     <tr>
-      <th>529 US 362</th>
-      <th>o'connor</th>
-      <td>0.008374</td>
-      <td>0.10935</td>
-      <td>0.110653</td>
-      <td>0.000003</td>
-      <td>0.01034</td>
-      <td>0.10935</td>
+      <th>530 US 914</th>
+      <th>breyer</th>
+      <td>0.224984</td>
+      <td>0.005495</td>
+      <td>0.047712</td>
+      <td>0.084685</td>
+      <td>0.076968</td>
+      <td>0.084685</td>
     </tr>
   </tbody>
 </table>
@@ -628,13 +642,13 @@ window_width, num_words = 3, len(opinion_text.split())
 words = iter(opinion_text.split())
 windows = [' '.join(itertools.islice(words, 0, window_width))
            for _ in range(num_words // window_width)]
-print([window for window in windows if 'minor' in window])
+print([window for window in windows if 'viable' in window])
 ```
 
-    []
+    ['a nonviable fetus."', 'circumstances involving nonviable', 'a nonviable fetus."']
     
 
-    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\732627407.py:3: PerformanceWarning: indexing past lexsort depth may impact performance.
+    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\2488274920.py:3: PerformanceWarning: indexing past lexsort depth may impact performance.
       opinion_text = df.loc[opinion_of_interest, 'text'][0]
     
 
@@ -855,17 +869,19 @@ topic_proportion_by_year.head()
 
 
 ```python
+plt.figure(figsize=(15, 8))
 window = 3 
 topic_proportion_rolling = topic_proportion_by_year.loc[1900:, topic_fourteen].rolling(window=window).mean()
-topic_proportion_rolling.plot(color='gold')
+topic_proportion_rolling.plot(color='mediumorchid')
 plt.title(f'Prevalence of {topic_fourteen} ({window} year rolling average)'
           f'\n{topic_top_words_joined}')
+plt.axvline(x=1973, color='red', label="Roe v. Wade Decision")
 ```
 
 
 
 
-    Text(0.5, 1.0, 'Prevalence of Topic 14 (3 year rolling average)\nchild, children, medical, health, women, treatment, care, hospital, family, age')
+    <matplotlib.lines.Line2D at 0x23de1228220>
 
 
 
@@ -877,6 +893,7 @@ plt.title(f'Prevalence of {topic_fourteen} ({window} year rolling average)'
 
 
 ```python
+plt.figure(figsize=(15, 8))
 abortion_top_topics = topic_word_distributions['abortion'].sort_values(ascending=False).head(5)
 viability_top_topics_top_words = topic_word_distributions.loc[abortion_top_topics.index].apply(lambda row: ', '.join(row.sort_values(ascending=False).head().index), axis=1)
 viability_top_topics_top_words.name = 'topic_top_words'
@@ -915,8 +932,8 @@ topic_proportion_by_year = topic_word_counts_by_year.divide(word_counts_by_year,
 topic_proportion_by_year.head()
 window = 3 
 topic_proportion_rolling = topic_proportion_by_year.loc[1900:, topic_fourteen].rolling(window=window).mean()
-topic_proportion_rolling.plot(color='red')
-plt.axvline(x=1973, color='mediumorchid', label="Roe v. Wade Decision")
+topic_proportion_rolling.plot(color='mediumorchid')
+plt.axvline(x=1973, color='red', label="Roe v. Wade Decision")
 plt.title(f'Prevalence of {topic_fourteen} ({window} year rolling average)'
           f'\n{topic_top_words_joined}')
 ```
@@ -929,15 +946,15 @@ plt.title(f'Prevalence of {topic_fourteen} ({window} year rolling average)'
     child, children, medical, health, women, treatment, care, hospital, family, age
     
 
-    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\2597353791.py:6: PerformanceWarning: indexing past lexsort depth may impact performance.
+    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\3989174566.py:7: PerformanceWarning: indexing past lexsort depth may impact performance.
       document_topic_distributions.loc[opinion_of_interest, abortion_top_topics.index]
-    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\2597353791.py:7: PerformanceWarning: indexing past lexsort depth may impact performance.
+    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\3989174566.py:8: PerformanceWarning: indexing past lexsort depth may impact performance.
       print(df.loc[opinion_of_interest, 'text'].values[0][1000:2000])
-    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\2597353791.py:12: PerformanceWarning: indexing past lexsort depth may impact performance.
+    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\3989174566.py:13: PerformanceWarning: indexing past lexsort depth may impact performance.
       for word in df.loc[opinion_of_interest, 'text'].values[0].split()))
-    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\2597353791.py:13: PerformanceWarning: indexing past lexsort depth may impact performance.
+    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\3989174566.py:14: PerformanceWarning: indexing past lexsort depth may impact performance.
       document_topic_distributions.loc[opinion_of_interest, abortion_top_topics.index.tolist() + ['Topic 63']]
-    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\2597353791.py:20: PerformanceWarning: indexing past lexsort depth may impact performance.
+    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\3989174566.py:21: PerformanceWarning: indexing past lexsort depth may impact performance.
       opinion_text = df.loc[opinion_of_interest, 'text'][0]
     
 
@@ -956,6 +973,7 @@ plt.title(f'Prevalence of {topic_fourteen} ({window} year rolling average)'
 
 
 ```python
+plt.figure(figsize=(15, 8))
 abortion_top_topics = topic_word_distributions['abortion'].sort_values(ascending=False).head(5)
 viability_top_topics_top_words = topic_word_distributions.loc[abortion_top_topics.index].apply(lambda row: ', '.join(row.sort_values(ascending=False).head().index), axis=1)
 viability_top_topics_top_words.name = 'topic_top_words'
@@ -994,8 +1012,8 @@ topic_proportion_by_year = topic_word_counts_by_year.divide(word_counts_by_year,
 topic_proportion_by_year.head()
 window = 3 
 topic_proportion_rolling = topic_proportion_by_year.loc[1900:, topic_fourteen].rolling(window=window).mean()
-topic_proportion_rolling.plot(color='blue')
-plt.axvline(x=1973, color='mediumorchid', label="Roe v. Wade Decision")
+topic_proportion_rolling.plot(color='mediumorchid')
+plt.axvline(x=1973, color='red', label="Roe v. Wade Decision")
 plt.title(f'Prevalence of {topic_fourteen} ({window} year rolling average)'
           f'\n{topic_top_words_joined}')
 plt.legend()
@@ -1009,22 +1027,22 @@ plt.legend()
     child, children, medical, health, women, treatment, care, hospital, family, age
     
 
-    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\3659214132.py:6: PerformanceWarning: indexing past lexsort depth may impact performance.
+    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\3772412823.py:7: PerformanceWarning: indexing past lexsort depth may impact performance.
       document_topic_distributions.loc[opinion_of_interest, abortion_top_topics.index]
-    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\3659214132.py:7: PerformanceWarning: indexing past lexsort depth may impact performance.
+    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\3772412823.py:8: PerformanceWarning: indexing past lexsort depth may impact performance.
       print(df.loc[opinion_of_interest, 'text'].values[0][1000:2000])
-    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\3659214132.py:12: PerformanceWarning: indexing past lexsort depth may impact performance.
+    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\3772412823.py:13: PerformanceWarning: indexing past lexsort depth may impact performance.
       for word in df.loc[opinion_of_interest, 'text'].values[0].split()))
-    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\3659214132.py:13: PerformanceWarning: indexing past lexsort depth may impact performance.
+    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\3772412823.py:14: PerformanceWarning: indexing past lexsort depth may impact performance.
       document_topic_distributions.loc[opinion_of_interest, abortion_top_topics.index.tolist() + ['Topic 63']]
-    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\3659214132.py:20: PerformanceWarning: indexing past lexsort depth may impact performance.
+    C:\Users\KSpicer\AppData\Local\Temp\ipykernel_13228\3772412823.py:21: PerformanceWarning: indexing past lexsort depth may impact performance.
       opinion_text = df.loc[opinion_of_interest, 'text'][0]
     
 
 
 
 
-    <matplotlib.legend.Legend at 0x23de0ce81c0>
+    <matplotlib.legend.Legend at 0x23de12a3460>
 
 
 
@@ -1033,8 +1051,3 @@ plt.legend()
 ![png](roe_v_wade_topic_modeling_files/roe_v_wade_topic_modeling_38_3.png)
     
 
-
-
-```python
-
-```
